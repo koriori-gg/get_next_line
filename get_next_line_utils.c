@@ -57,7 +57,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		ret[i + j] = s2[j];
 		j++;
 	}
-	ret[i + j] = '\0';
+	ret[i + j] = '\0';//多分いらん(callocしてるs)
 	return (ret);
 }
 

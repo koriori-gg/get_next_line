@@ -7,7 +7,9 @@
 
 #include <stdio.h>
 
-//# define BUFFER_SIZE 256
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
@@ -17,7 +19,7 @@ void	*ft_calloc(size_t n, size_t size);
 
 char    *get_next_line(int fd);
 
-char    *read_line(int fd, char *save);
+char    *read_file(int fd, char *save);
 char    *get_line(char *save);
 char    *save_line(char *save);
 #endif
