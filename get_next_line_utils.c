@@ -1,4 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ihashimo <maaacha.kuri05@gmail.com>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/16 12:23:11 by ihashimo          #+#    #+#             */
+/*   Updated: 2022/12/16 12:32:34 by ihashimo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = 0;
+		i++;
+	}
+}
+
+void	*ft_calloc(size_t n, size_t size)
+{
+	void	*ret;
+
+	if (n == 0 || size == 0)
+	{
+		n = 1;
+		size = 1;
+	}
+	if (size > SIZE_MAX / n)
+		return (NULL);
+	ret = malloc(size * n);
+	if (!ret)
+		return (NULL);
+	ft_bzero(ret, size * n);
+	return (ret);
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -34,6 +76,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
+	size_t	len;
 	char	*ret;
 
 	if (s1 == NULL && s2)
@@ -42,51 +85,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s2 = "";
 	else if (s1 == NULL && s2 == NULL)
 		return (NULL);
-	ret = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));//change to malloc
+	ret = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
 	if (!ret)
 		return (NULL);
+	len = 0;
 	i = 0;
 	while (s1[i] != '\0')
-	{
-		ret[i] = s1[i];
-		i++;
-	}
+		ret[len++] = s1[i++];
 	j = 0;
 	while (s2[j] != '\0')
-	{
-		ret[i + j] = s2[j];
-		j++;
-	}
-	ret[i + j] = '\0';//多分いらん(callocしてるs)
-	return (ret);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		((unsigned char *)s)[i] = 0;
-		i++;
-	}
-}
-
-void	*ft_calloc(size_t n, size_t size)
-{
-	void	*ret;
-
-	if (n == 0 || size == 0)
-	{
-		n = 1;
-		size = 1;
-	}
-	if (size > SIZE_MAX / n)
-		return (NULL);
-	ret = malloc(size * n);
-	if (!ret)
-		return (NULL);
-	ft_bzero(ret, size * n);
+		ret[len++] = s2[j++];
+	ret[len] = '\0';
 	return (ret);
 }
