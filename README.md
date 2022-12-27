@@ -22,14 +22,14 @@ The function is written in C language and thus needs the gcc compiler and some s
 ### Instructions
 #### 1.clone
 ```
-git clone git@github.com:koriori-gg/ft_printf.git
+git clone git@github.com:koriori-gg/get_next_line.git
 ```
 #### 2. Using it in your code
 To use the function in your code, simply include its header:
 ```
-#include "/include/ft_printf.h"
+#include "/include/get_next_line.h"
 ```
-and, when compiling your code, add "libftprintf.a":
+compile
 ```
 gcc -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c 
 ./a.out
